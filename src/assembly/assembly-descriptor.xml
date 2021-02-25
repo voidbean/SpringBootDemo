@@ -1,0 +1,55 @@
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+	<id>apollo-assembly</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<!--scripts -->
+		<fileSet>
+			<directory>src/scripts</directory>
+			<outputDirectory>dev-app/bin</outputDirectory>
+			<includes>
+				<include>*.sh</include>
+			</includes>
+			<fileMode>0755</fileMode>
+			<lineEnding>unix</lineEnding>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>dev-app/conf</outputDirectory>
+			<includes>
+				<include>*.yml</include>
+				<include>*.xml</include>
+			</includes>
+			<lineEnding>unix</lineEnding>
+		</fileSet>
+		<!--artifact -->
+		<fileSet>
+			<directory>target</directory>
+			<outputDirectory>dev-app/lib</outputDirectory>
+			<includes>
+				<include>${project.artifactId}-*.jar</include>
+			</includes>
+			<fileMode>0755</fileMode>
+		</fileSet>
+	</fileSets>
+
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>dev-app/lib</outputDirectory>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<scope>runtime</scope>
+			<!--<excludes>
+                <exclude>com.sun.jersey:jersey-*:*</exclude>
+                <exclude>tomcat:jasper-*:*</exclude>
+                <exclude>*:servlet-*:*</exclude>
+                <exclude>*:jsp-*:*</exclude>
+            </excludes>-->
+		</dependencySet>
+	</dependencySets>
+</assembly>

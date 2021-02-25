@@ -1,0 +1,46 @@
+
+server:
+  port: 9990
+  tomcat:
+    accept-count: 15000
+    max-threads: 2000
+    max-connections: 15000
+spring:
+  application:
+    name: spring-demo
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #driver-class-name: oracle.jdbc.driver.OracleDriver
+    #url: jdbc:oracle:thin:@10.88.2.119:1521:prod
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/livedemo?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 1234
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    enabled: false
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 15
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    root: INFO
+
+version: 1.0
